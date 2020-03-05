@@ -19,9 +19,6 @@ const App = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [message, setMessage] = useState("");
   useEffect(() => {
-    // webAuth.authorize();
-    console.log("expires in ? ", localStorage.getItem(EXPIRES_IN));
-
     handleAuthentication((res: boolean) => {
       history.push("/");
       setIsAuth(res);
@@ -39,18 +36,6 @@ const App = () => {
     };
     setTimeout(() => {
       callCheckAuth();
-      // history.push("/");
-      // if (isAuth === null) {
-      //   checkAuth((status: boolean) => {
-      //     console.log("status", status);
-
-      //     if (!status) {
-      //       setIsAuth(false);
-      //     } else {
-      //       setIsAuth(true);
-      //     }
-      //   });
-      // }
     }, 100);
   }, []);
   const fetchPrivate = () => {
