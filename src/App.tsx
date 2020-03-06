@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
+import { Button } from "semantic-ui-react";
+import Nav from "./components/Nav";
 import {
   handleAuthentication,
   checkAuth,
@@ -61,16 +63,22 @@ const App = () => {
     <div>
       <Router history={history}>
         <Route path="/">
-          <button onClick={() => login(() => history.push("/"))}>Login</button>
-          <button onClick={() => fetchPrivate()}>Fetch</button>
-          <button onClick={() => logout()}>Logout</button>
-          <button
-            onClick={() => checkAuth((res: boolean) => console.log("res", res))}
-          >
-            Check
-          </button>
-          <div>{!isAuth ? "Not authenticated" : "Authenticated"}</div>
-          <div>Message: {message}</div>
+          <Nav>
+            <Button primary onClick={() => login(() => history.push("/"))}>
+              Login
+            </Button>
+            <Button onClick={() => fetchPrivate()}>Fetch</Button>
+            <Button onClick={() => logout()}>Logout</Button>
+            <Button
+              onClick={() =>
+                checkAuth((res: boolean) => console.log("res", res))
+              }
+            >
+              Check
+            </Button>
+            <div>{!isAuth ? "Not authenticated" : "Authenticated"}</div>
+            <div>Message: {message}</div>
+          </Nav>
         </Route>
       </Router>
     </div>
