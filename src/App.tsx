@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
-import logo from "./logo.svg";
-import { Button } from "semantic-ui-react";
+import "./App.css";
 import Nav from "./components/Nav";
+import { Button } from "antd";
+import Comments from "./components/Comments";
+import { ApolloClient } from "apollo-client";
+import { createHttpLink } from "apollo-link-http";
+import { setContext } from "apollo-link-context";
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { gql } from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
 import {
   handleAuthentication,
   checkAuth,
@@ -14,74 +21,57 @@ import {
 } from "./utils/auth0-helper";
 import { Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import history from "./utils/history";
-const PRIVATE_ENDPOINT =
-  "https://h9gqunf6y7.execute-api.us-west-2.amazonaws.com/dev/api/private";
+import { OmitProps } from "antd/lib/transfer/renderListBody";
+
+const httpLink = createHttpLink({
+  uri: "https://0edpiwx4nd.execute-api.us-east-1.amazonaws.com/dev/api/graphql"
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem(ID_TOKEN);
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ""
+    }
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache()
+});
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
-  const [message, setMessage] = useState("");
-  useEffect(() => {
-    handleAuthentication((res: boolean) => {
-      history.push("/");
-      setIsAuth(res);
-    });
-  }, []);
-  useEffect(() => {
-    const callCheckAuth = async () => {
-      const authStat = await checkAuthAsync();
-      console.log("authstat", authStat);
-      if (!authStat) {
-        setIsAuth(false);
-      } else {
-        setIsAuth(true);
-      }
-    };
-    setTimeout(() => {
-      callCheckAuth();
-    }, 100);
-  }, []);
-  const fetchPrivate = () => {
-    const token = localStorage.getItem(ID_TOKEN);
-    console.log("token present?", token);
-    fetch(PRIVATE_ENDPOINT, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Token:", data);
-        setMessage(data.message);
-      })
-      .catch(e => {
-        console.log("error", e);
-        setMessage("error fetching");
-      });
-  };
+  // client
+  //   .query({
+  //     query: gql`
+  //       {
+  //         comments {
+  //           content
+  //           userId
+  //           commentId
+  //         }
+  //       }
+  //     `
+  //   })
+  //   .then(result => console.log(result))
+  //   .catch(err => console.log);
+
   return (
-    <div>
-      <Router history={history}>
-        <Route path="/">
-          <Nav>
-            <Button primary onClick={() => login(() => history.push("/"))}>
-              Login
-            </Button>
-            <Button onClick={() => fetchPrivate()}>Fetch</Button>
-            <Button onClick={() => logout()}>Logout</Button>
-            <Button
-              onClick={() =>
-                checkAuth((res: boolean) => console.log("res", res))
-              }
-            >
-              Check
-            </Button>
-            <div>{!isAuth ? "Not authenticated" : "Authenticated"}</div>
-            <div>Message: {message}</div>
-          </Nav>
-        </Route>
-      </Router>
-    </div>
+    <ApolloProvider client={client}>
+      <div>
+        <Router history={history}>
+          <Route path="/">
+            <Nav resetStore={client.resetStore}>
+              <Comments />
+            </Nav>
+          </Route>
+        </Router>
+      </div>
+    </ApolloProvider>
   );
 };
 
