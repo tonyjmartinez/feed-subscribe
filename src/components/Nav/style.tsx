@@ -33,11 +33,10 @@ const Nav = (props: Props) => {
   const [isAuth, setIsAuth] = useState(false);
   useEffect(() => {
     handleAuthentication((res: boolean) => {
+      resetStore();
+
       history.push("/");
       setIsAuth(res);
-      if (resetStore) {
-        resetStore();
-      }
     });
   }, []);
   useEffect(() => {
@@ -102,7 +101,7 @@ const Nav = (props: Props) => {
       </Button>
       <div>{!isAuth ? "Not authenticated" : "Authenticated"}</div>
       <div>Message: {message}</div>
-      {children}
+      {isAuth ? children : null}
     </>
   );
 };
