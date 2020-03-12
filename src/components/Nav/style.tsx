@@ -23,14 +23,14 @@ const PUBLIC_ENDPOINT =
 interface Props {
   children: React.ReactNode;
   resetStore: () => {};
+  isAuth: boolean;
+  setIsAuth: (a: boolean) => void;
 }
 
 const Nav = (props: Props) => {
-  const { children, resetStore } = props;
+  const { children, resetStore, isAuth, setIsAuth } = props;
   console.log("nav props", props);
 
-  const [message, setMessage] = useState("");
-  const [isAuth, setIsAuth] = useState(false);
   useEffect(() => {
     handleAuthentication((res: boolean) => {
       resetStore();
@@ -53,46 +53,12 @@ const Nav = (props: Props) => {
       callCheckAuth();
     }, 100);
   }, []);
-  const fetchPrivate = () => {
-    const token = localStorage.getItem(ID_TOKEN);
-    console.log("token present?", token);
-    fetch(PRIVATE_ENDPOINT, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Token:", data);
-        setMessage(data.message);
-      })
-      .catch(e => {
-        console.log("error", e);
-        setMessage("error fetching");
-      });
-  };
 
-  const fetchPublic = () => {
-    fetch(PUBLIC_ENDPOINT, {
-      method: "POST"
-    })
-      .then(response => response.json())
-      .then(data => {
-        setMessage(data.message);
-      })
-      .catch(e => {
-        console.log("error", e);
-        setMessage("error fetching");
-      });
-  };
   return (
     <>
       <div>NAVBAR</div>
 
       <Button onClick={() => login(() => history.push("/"))}>Login</Button>
-      <Button onClick={() => fetchPrivate()}>Fetch</Button>
-      <Button onClick={() => fetchPublic()}>Fetch public</Button>
       <Button onClick={() => logout()}>Logout</Button>
       <Button
         onClick={() => checkAuth((res: boolean) => console.log("res", res))}
@@ -100,7 +66,6 @@ const Nav = (props: Props) => {
         Check
       </Button>
       <div>{!isAuth ? "Not authenticated" : "Authenticated"}</div>
-      <div>Message: {message}</div>
       {isAuth ? children : null}
     </>
   );

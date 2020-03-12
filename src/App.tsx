@@ -24,7 +24,8 @@ import history from "./utils/history";
 import { OmitProps } from "antd/lib/transfer/renderListBody";
 
 const httpLink = createHttpLink({
-  uri: "https://0edpiwx4nd.execute-api.us-east-1.amazonaws.com/dev/api/graphql"
+  // uri: "https://0edpiwx4nd.execute-api.us-east-1.amazonaws.com/dev/api/graphql"
+  uri: "https://api.feedsubscri.be/dev/api/graphql"
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -45,27 +46,18 @@ const client = new ApolloClient({
 });
 
 const App = () => {
-  // client
-  //   .query({
-  //     query: gql`
-  //       {
-  //         comments {
-  //           content
-  //           userId
-  //           commentId
-  //         }
-  //       }
-  //     `
-  //   })
-  //   .then(result => console.log(result))
-  //   .catch(err => console.log);
+  const [isAuth, setIsAuth] = useState(false);
 
   return (
     <ApolloProvider client={client}>
       <div>
         <Router history={history}>
           <Route path="/">
-            <Nav resetStore={client.resetStore}>
+            <Nav
+              resetStore={client.resetStore}
+              isAuth={isAuth}
+              setIsAuth={(a: boolean) => setIsAuth(a)}
+            >
               <Comments />
             </Nav>
           </Route>
