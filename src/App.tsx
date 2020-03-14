@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Nav from "./components/Nav";
+import AppProvider from "./context/AppProvider";
 import { Button } from "antd";
 import Comments from "./components/Comments";
 import { ApolloClient } from "apollo-client";
@@ -50,7 +51,7 @@ const App = () => {
 
   return (
     <ApolloProvider client={client}>
-      <div>
+      <AppProvider>
         <Router history={history}>
           <Route path="/">
             <Nav
@@ -62,7 +63,7 @@ const App = () => {
             </Nav>
           </Route>
         </Router>
-      </div>
+      </AppProvider>
     </ApolloProvider>
   );
 };

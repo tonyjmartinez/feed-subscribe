@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import withAppContext from "../context/withAppContext";
 
 import {
   handleAuthentication,
@@ -12,6 +13,7 @@ import {
   ACCESS_TOKEN,
   checkAuthAsync
 } from "../utils/auth0-helper";
+import { AppContext } from "../context/AppContext";
 
 const GET_COMMENTS = gql`
   {
@@ -23,7 +25,15 @@ const GET_COMMENTS = gql`
   }
 `;
 
-const Comments = () => {
+interface Props {
+  context: {
+    isDarkMode: boolean;
+    setIsDarkMode: Function;
+  };
+}
+
+const Comments = (props: Props) => {
+  console.log("comment props", props);
   const [attemptedReset, setAttemptedReset] = useState(false);
   const { loading, error, data, client } = useQuery(GET_COMMENTS);
 
@@ -53,4 +63,4 @@ const Comments = () => {
   return <p>Something else...</p>;
 };
 
-export default Comments;
+export default withAppContext(Comments);
