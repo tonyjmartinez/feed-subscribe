@@ -12,6 +12,8 @@ interface IContext {
   setIsAuth: Function;
   isDarkMode: boolean;
   setIsDarkMode: Function;
+  login: Function;
+  logout: Function;
 }
 
 export const AppContext = React.createContext({} as IContext);

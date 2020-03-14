@@ -47,20 +47,13 @@ const client = new ApolloClient({
 });
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
-
   return (
     <ApolloProvider client={client}>
-      <AppProvider>
+      <AppProvider resetStore={client.resetStore}>
         <Router history={history}>
           <Route path="/">
-            <Nav
-              resetStore={client.resetStore}
-              isAuth={isAuth}
-              setIsAuth={(a: boolean) => setIsAuth(a)}
-            >
-              <Comments />
-            </Nav>
+            <Nav />
+            <Comments />
           </Route>
         </Router>
       </AppProvider>
