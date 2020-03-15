@@ -60,13 +60,12 @@ const App = (props: Props) => {
       <AppProvider resetStore={client.resetStore}>
         <GromProvider>
           <Router history={history}>
+            <Nav />
+            <Route exact path="/"></Route>
+
             <PrivateRoute path="/comments">
               <Comments />
             </PrivateRoute>
-
-            <Route path="/">
-              <Nav />
-            </Route>
           </Router>
         </GromProvider>
       </AppProvider>
