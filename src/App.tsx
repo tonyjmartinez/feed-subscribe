@@ -59,13 +59,11 @@ const App = (props: Props) => {
     <ApolloProvider client={client}>
       <AppProvider resetStore={client.resetStore}>
         <GromProvider>
+          <Nav />
           <Router history={history}>
-            <Nav />
             <Route exact path="/"></Route>
 
-            <PrivateRoute path="/comments">
-              <Comments />
-            </PrivateRoute>
+            <PrivateRoute path="/comments" component={Comments}></PrivateRoute>
           </Router>
         </GromProvider>
       </AppProvider>

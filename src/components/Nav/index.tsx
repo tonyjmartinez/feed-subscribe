@@ -30,6 +30,7 @@ const NavContainer = (props: Props) => {
             onClick={e => login(() => history.push("/"))}
           />
         )}
+        <Anchor href="/comments" label="Comments" />
         <CheckBox
           toggle
           checked={isDarkMode}
