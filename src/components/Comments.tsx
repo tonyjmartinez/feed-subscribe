@@ -32,6 +32,10 @@ interface Props {
   };
 }
 
+interface Comment {
+  content: string;
+}
+
 const Comments = (props: Props) => {
   console.log("comment props", props);
   const [attemptedReset, setAttemptedReset] = useState(false);
@@ -60,7 +64,7 @@ const Comments = (props: Props) => {
   //   </>
   // );
   if (data) console.log("data", data);
-  return <p>Something else...</p>;
+  return <p>{data.comments.map((cmt: Comment) => cmt.content)}</p>;
 };
 
 export default withAppContext(Comments);

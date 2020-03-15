@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Nav from "./components/Nav";
 import AppProvider from "./context/AppProvider";
+import withAppContext from "./context/withAppContext";
 import { Button } from "antd";
 import Comments from "./components/Comments";
 import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import { gql } from "apollo-boost";
+import PrivateRoute from "./components/hoc/PrivateRoute";
+import GromProvider from "./context/GromProvider";
 import { ApolloProvider } from "@apollo/react-hooks";
 import {
   handleAuthentication,
@@ -31,8 +33,8 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem(ID_TOKEN);
   // return the headers to the context so httpLink can read them
+  const token = localStorage.getItem(ID_TOKEN);
   return {
     headers: {
       ...headers,
@@ -46,19 +48,30 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-const App = () => {
+interface Props {
+  context: {
+    isAuth: boolean;
+  };
+}
+
+const App = (props: Props) => {
   return (
     <ApolloProvider client={client}>
       <AppProvider resetStore={client.resetStore}>
-        <Router history={history}>
-          <Route path="/">
-            <Nav />
-            <Comments />
-          </Route>
-        </Router>
+        <GromProvider>
+          <Router history={history}>
+            <Route path="/">
+              <Nav />
+            </Route>
+
+            <PrivateRoute path="/comments">
+              <Comments />
+            </PrivateRoute>
+          </Router>
+        </GromProvider>
       </AppProvider>
     </ApolloProvider>
   );
 };
 
-export default App;
+export default withAppContext(App);
