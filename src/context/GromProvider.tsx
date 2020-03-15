@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { Grommet } from "grommet";
 import withAppContext from "./withAppContext";
+import { css } from "styled-components";
 
 interface Props {
   children: ReactNode;
@@ -9,6 +10,10 @@ interface Props {
     setIsDarkMode: Function;
   };
 }
+const checkboxCheckStyle = css`
+  background-color: #2196f3;
+  border-color: #2196f3;
+`;
 
 const GromProvider = (props: Props) => {
   const { context } = props;
@@ -21,6 +26,9 @@ const GromProvider = (props: Props) => {
       theme={{
         global: {
           colors: {
+            "toggle-bg": "#757575",
+            "toggle-knob": "white",
+            "toggle-accent": "accent-2",
             brand: {
               dark: "#7700cc",
               light: "#6600cc"
@@ -28,66 +36,46 @@ const GromProvider = (props: Props) => {
             background: {
               dark: "#111111",
               light: "#FFFFFF"
-            },
-            "background-back": {
-              dark: "#111111",
-              light: "#EEEEEE"
-            },
-            "background-front": {
-              dark: "#222222",
-              light: "#FFFFFF"
-            },
-            "background-contrast": {
-              dark: "#FFFFFF11",
-              light: "#11111111"
-            },
-            text: {
-              dark: "#EEEEEE",
-              light: "#333333"
-            },
-            "text-strong": {
-              dark: "#FFFFFF",
-              light: "#000000"
-            },
-            "text-weak": {
-              dark: "#CCCCCC",
-              light: "#444444"
-            },
-            "text-xweak": {
-              dark: "#999999",
-              light: "#666666"
-            },
-            border: {
-              dark: "#444444",
-              light: "#CCCCCC"
-            },
-            control: "brand",
-            "active-background": "background-contrast",
-            "active-text": "text-strong",
-            "selected-background": "brand",
-            "selected-text": "text-strong",
-            "status-critical": "#FF4040",
-            "status-warning": "#FFAA15",
-            "status-ok": "#00C781",
-            "status-unknown": "#CCCCCC",
-            "status-disabled": "#CCCCCC",
-            "graph-0": "brand",
-            "graph-1": "status-warning"
+            }
+          }
+        },
+        checkBox: {
+          border: {
+            color: {
+              light: "toggle-bg"
+            }
           },
-          font: {
-            family: "Helvetica"
+          color: {
+            light: "toggle-knob"
           },
-          active: {
-            color: "active-text"
+          check: {
+            radius: "2px"
           },
           hover: {
-            background: "active-background",
-            color: "active-text"
+            border: {
+              color: undefined
+            }
           },
-          selected: {
-            background: "selected-background",
-            color: "selected-text"
-          }
+          toggle: {
+            background: { light: "toggle-accent" },
+            color: {
+              light: "toggle-knob"
+            },
+            size: "36px",
+            knob: {
+              extend: `
+              top: -4px;
+              box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12),
+               0px 2px 2px 0px rgba(0,0,0,0.24);
+            `
+            },
+            extend: ({ checked }) => `
+            height: 14px;
+            ${checked && checkboxCheckStyle}
+          `
+          },
+          gap: "xsmall",
+          size: "18px"
         }
       }}
     >
