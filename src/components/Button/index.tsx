@@ -8,8 +8,8 @@ export interface Props {
 }
 
 const ButtonContainer = (props: Props) => {
-  const { onClick } = props;
-  return <Btn primary onClick={() => onClick()} label={props.children} />;
+  const { onClick, ...rest } = props;
+  return <Btn {...rest} onClick={() => onClick()} label={props.children} />;
 };
 
 export default ButtonContainer;
