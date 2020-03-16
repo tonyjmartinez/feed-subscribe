@@ -5,10 +5,10 @@ import {
   Button,
   Anchor,
   CheckBox,
-  Header,
   Box,
   Grid,
-  Text
+  Text,
+  Heading
 } from "grommet";
 import {
   Home,
@@ -54,10 +54,16 @@ const NavContainer = (props: Props) => {
           direction="row"
           align="center"
           justify="between"
-          pad={{ horizontal: "medium", vertical: "small" }}
+          pad={{ horizontal: "small", vertical: "small" }}
           background="dark-2"
         >
-          <Menu onClick={() => setSidebar(!sidebar)} />
+          <Box direction="row" gap="large">
+            <Menu onClick={() => setSidebar(!sidebar)} />
+            <Heading level={3} margin="none">
+              FeedSubscri.be
+            </Heading>
+          </Box>
+
           {/* <Button >
             <Text size="large">Title</Text>
           </Button> */}
