@@ -58,7 +58,7 @@ const NavContainer = (props: Props) => {
           background="dark-2"
         >
           <Box direction="row" gap="large">
-            <Menu onClick={() => setSidebar(!sidebar)} />
+            <Menu onClick={() => setSidebar(!sidebar)} size="large" />
             <Heading level={3} margin="none">
               FeedSubscri.be
             </Heading>
