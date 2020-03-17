@@ -36,7 +36,7 @@ interface Props {
 const NavContainer = (props: Props) => {
   const { context } = props;
   const { isAuth, login, logout, isDarkMode, setIsDarkMode } = context;
-  const [sidebar, setSidebar] = useState(true);
+  const [sidebar, setSidebar] = useState(false);
   return (
     <>
       <Grid
