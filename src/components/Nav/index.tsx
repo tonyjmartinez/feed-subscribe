@@ -19,7 +19,7 @@ import {
   Logout
 } from "grommet-icons";
 import Comments from "../Comments";
-import { Menu } from "grommet-icons";
+import { Apps } from "grommet-icons";
 
 import history from "../../utils/history";
 
@@ -58,10 +58,16 @@ const NavContainer = (props: Props) => {
           background="dark-2"
         >
           <Box direction="row" gap="large">
-            <Menu onClick={() => setSidebar(!sidebar)} size="large" />
-            <Heading level={3} margin="none">
-              FeedSubscri.be
-            </Heading>
+            <Apps
+              color="light-2"
+              onClick={() => setSidebar(!sidebar)}
+              size="large"
+            />
+            <Box alignSelf="center">
+              <Heading level={3} margin="none" color="light-1">
+                FeedSubscri.be
+              </Heading>
+            </Box>
           </Box>
 
           {/* <Button >
