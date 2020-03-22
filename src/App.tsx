@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Nav from "./components/Nav";
+import { Button } from "grommet";
 import AppProvider from "./context/AppProvider";
 import withAppContext from "./context/withAppContext";
-import { Button } from "antd";
 import Comments from "./components/Comments";
 import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
@@ -25,7 +25,6 @@ import {
 } from "./utils/auth0-helper";
 import { Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import history from "./utils/history";
-import { OmitProps } from "antd/lib/transfer/renderListBody";
 
 const httpLink = createHttpLink({
   // uri: "https://0edpiwx4nd.execute-api.us-east-1.amazonaws.com/dev/api/graphql"
@@ -52,10 +51,14 @@ const client = new ApolloClient({
 interface Props {
   context: {
     isAuth: boolean;
+    setIsDarkMode: Function;
+    isDarkMode: boolean;
   };
 }
 
 const App = (props: Props) => {
+  const { context } = props;
+  const { isDarkMode, setIsDarkMode } = context;
   return (
     <ApolloProvider client={client}>
       <AppProvider resetStore={client.resetStore}>
@@ -65,7 +68,6 @@ const App = (props: Props) => {
               <Route exact path="/">
                 <Grid />
               </Route>
-
               <PrivateRoute
                 path="/comments"
                 component={Comments}

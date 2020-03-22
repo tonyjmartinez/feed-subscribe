@@ -27,11 +27,15 @@ const ResponsiveLocalStorageLayout = props => {
     <div>
       <button onClick={() => resetLayout()}>Reset Layout</button>
       <ResponsiveReactGridLayout
-        className="layout"
         cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-        rowHeight={30}
+        rowHeight={20}
+        compactType="vertical"
         layouts={layouts}
         onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
+        preventCollision={false}
+        measureBeforeMount={false}
+        useCSSTransforms={true}
+        style={{ position: "relative" }}
       >
         <GridBox
           key="1"
@@ -39,18 +43,30 @@ const ResponsiveLocalStorageLayout = props => {
         >
           <span className="text">1</span>
         </GridBox>
-        <div key="2" data-grid={{ w: 2, h: 3, x: 2, y: 0, minW: 2, minH: 3 }}>
+        <GridBox
+          key="2"
+          data-grid={{ w: 2, h: 3, x: 2, y: 0, minW: 2, minH: 3 }}
+        >
           <span className="text">2</span>
-        </div>
-        <div key="3" data-grid={{ w: 2, h: 3, x: 4, y: 0, minW: 2, minH: 3 }}>
+        </GridBox>
+        <GridBox
+          key="3"
+          data-grid={{ w: 2, h: 3, x: 4, y: 0, minW: 2, minH: 3 }}
+        >
           <span className="text">3</span>
-        </div>
-        <div key="4" data-grid={{ w: 2, h: 3, x: 6, y: 0, minW: 2, minH: 3 }}>
+        </GridBox>
+        <GridBox
+          key="4"
+          data-grid={{ w: 2, h: 3, x: 6, y: 0, minW: 2, minH: 3 }}
+        >
           <span className="text">4</span>
-        </div>
-        <div key="5" data-grid={{ w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3 }}>
+        </GridBox>
+        <GridBox
+          key="5"
+          data-grid={{ w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3 }}
+        >
           <span className="text">5</span>
-        </div>
+        </GridBox>
       </ResponsiveReactGridLayout>
     </div>
   );
