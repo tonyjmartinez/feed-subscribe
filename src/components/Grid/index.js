@@ -32,9 +32,6 @@ const ResponsiveLocalStorageLayout = props => {
         compactType="vertical"
         layouts={layouts}
         onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
-        preventCollision={false}
-        measureBeforeMount={false}
-        useCSSTransforms={true}
         style={{ position: "relative" }}
       >
         <GridBox

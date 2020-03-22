@@ -113,6 +113,9 @@ const NavContainer = (props: Props) => {
                 </Box>
               </Button>
             )}
+            <Button primary onClick={e => setIsDarkMode(!isDarkMode)}>
+              DARK TOGGLE
+            </Button>
           </Box>
         )}
         <Box gridArea="main">
