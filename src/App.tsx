@@ -12,6 +12,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import PrivateRoute from "./components/hoc/PrivateRoute";
 import GromProvider from "./context/GromProvider";
 import { ApolloProvider } from "@apollo/react-hooks";
+import Grid from "./components/Grid/index.js";
 import {
   handleAuthentication,
   checkAuth,
@@ -59,12 +60,18 @@ const App = (props: Props) => {
     <ApolloProvider client={client}>
       <AppProvider resetStore={client.resetStore}>
         <GromProvider>
-          <Nav />
-          <Router history={history}>
-            <Route exact path="/"></Route>
+          <Nav>
+            <Router history={history}>
+              <Route exact path="/">
+                <Grid />
+              </Route>
 
-            <PrivateRoute path="/comments" component={Comments}></PrivateRoute>
-          </Router>
+              <PrivateRoute
+                path="/comments"
+                component={Comments}
+              ></PrivateRoute>
+            </Router>
+          </Nav>
         </GromProvider>
       </AppProvider>
     </ApolloProvider>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactElement } from "react";
 import withAppContext from "../../context/withAppContext";
 import {
   Nav,
@@ -31,10 +31,11 @@ interface Props {
     isDarkMode: boolean;
     setIsDarkMode: Function;
   };
+  children: ReactElement[];
 }
 
 const NavContainer = (props: Props) => {
-  const { context } = props;
+  const { context, children } = props;
   const { isAuth, login, logout, isDarkMode, setIsDarkMode } = context;
   const [sidebar, setSidebar] = useState(false);
   return (
@@ -114,13 +115,14 @@ const NavContainer = (props: Props) => {
             )}
           </Box>
         )}
-        <Box gridArea="main" justify="center" align="center">
-          <Text>main</Text>
+        <Box gridArea="main">
+          {children}
+          {/* <Text>main</Text>
           <Text>{!isAuth ? "Not authenticated" : "Authenticated"}</Text>
           <Text>{isAuth ? <Comments /> : null}</Text>
           <Button primary onClick={e => setIsDarkMode(!isDarkMode)}>
             DARK TOGGLE
-          </Button>
+          </Button> */}
         </Box>
       </Grid>
     </>
