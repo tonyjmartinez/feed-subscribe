@@ -12,7 +12,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import PrivateRoute from "./components/hoc/PrivateRoute";
 import GromProvider from "./context/GromProvider";
 import { ApolloProvider } from "@apollo/react-hooks";
-import Grid from "./components/Grid/index.js";
+import Grid from "./components/Grid/index";
 import {
   handleAuthentication,
   checkAuth,
