@@ -13,6 +13,8 @@ import PrivateRoute from "./components/hoc/PrivateRoute";
 import GromProvider from "./context/GromProvider";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Grid from "./components/Grid/index";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
 import {
   handleAuthentication,
   checkAuth,
