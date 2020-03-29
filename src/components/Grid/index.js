@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "styled-components";
+import { Box } from "grommet";
 
 const GridBox = styled.div`
   background-color: grey;
@@ -24,7 +25,11 @@ const ResponsiveLocalStorageLayout = props => {
   };
 
   return (
-    <div>
+    <Box
+      direction="column"
+      border={{ color: "brand", size: "large" }}
+      pad="medium"
+    >
       <button onClick={() => resetLayout()}>Reset Layout</button>
       <ResponsiveReactGridLayout
         cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
@@ -65,7 +70,7 @@ const ResponsiveLocalStorageLayout = props => {
           <span className="text">5</span>
         </GridBox>
       </ResponsiveReactGridLayout>
-    </div>
+    </Box>
   );
 };
 
