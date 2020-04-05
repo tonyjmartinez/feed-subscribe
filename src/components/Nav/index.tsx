@@ -8,7 +8,7 @@ import {
   Box,
   Grid,
   Text,
-  Heading
+  Heading,
 } from "grommet";
 import {
   Home,
@@ -16,7 +16,7 @@ import {
   Notification,
   ChatOption,
   Login,
-  Logout
+  Logout,
 } from "grommet-icons";
 import Comments from "../Comments";
 import { Apps } from "grommet-icons";
@@ -47,7 +47,7 @@ const NavContainer = (props: Props) => {
         areas={[
           { name: "header", start: [0, 0], end: [1, 0] },
           { name: "sidebar", start: [0, 1], end: [0, 1] },
-          { name: "main", start: [1, 1], end: [1, 1] }
+          { name: "main", start: [1, 1], end: [1, 1] },
         ]}
       >
         <Box
@@ -63,6 +63,7 @@ const NavContainer = (props: Props) => {
               color="light-2"
               onClick={() => setSidebar(!sidebar)}
               size="large"
+              style={{ cursor: "pointer" }}
             />
             <Box alignSelf="center">
               <Heading level={3} margin="none" color="light-1">
@@ -83,11 +84,11 @@ const NavContainer = (props: Props) => {
             width="xsmall"
             animation={[
               { type: "fadeIn", duration: 300 },
-              { type: "slideRight", size: "xlarge", duration: 150 }
+              { type: "slideRight", size: "xlarge", duration: 150 },
             ]}
           >
             {isAuth ? (
-              <Button key={2} onClick={e => logout()}>
+              <Button key={2} onClick={(e) => logout()}>
                 <Box
                   direction="row"
                   gap="xsmall"
@@ -100,7 +101,7 @@ const NavContainer = (props: Props) => {
                 </Box>
               </Button>
             ) : (
-              <Button key={1} onClick={e => login(() => history.push("/"))}>
+              <Button key={1} onClick={(e) => login(() => history.push("/"))}>
                 <Box
                   direction="row"
                   gap="xsmall"
@@ -113,7 +114,7 @@ const NavContainer = (props: Props) => {
                 </Box>
               </Button>
             )}
-            <Button primary onClick={e => setIsDarkMode(!isDarkMode)}>
+            <Button primary onClick={(e) => setIsDarkMode(!isDarkMode)}>
               DARK TOGGLE
             </Button>
           </Box>

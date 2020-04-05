@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "styled-components";
-import { Box } from "grommet";
+import { Box, Button } from "grommet";
 
 const GridBox = styled.div`
-  background-color: grey;
+  background-color: orange;
+  border-radius: 0.5em;
 `;
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const originalLayouts = getFromLS("layouts") || {};
 
-const ResponsiveLocalStorageLayout = props => {
+const ResponsiveLocalStorageLayout = (props) => {
   const [layouts, setLayouts] = useState(
     JSON.parse(JSON.stringify(originalLayouts))
   );
@@ -30,7 +31,9 @@ const ResponsiveLocalStorageLayout = props => {
       border={{ color: "brand", size: "large" }}
       pad="medium"
     >
-      <button onClick={() => resetLayout()}>Reset Layout</button>
+      <Button style={{ width: "10%" }} primary onClick={() => resetLayout()}>
+        Reset Layout
+      </Button>
       <ResponsiveReactGridLayout
         cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
         rowHeight={20}
@@ -41,7 +44,7 @@ const ResponsiveLocalStorageLayout = props => {
       >
         <GridBox
           key="1"
-          data-grid={{ w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 1, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">1</span>
         </GridBox>
@@ -91,7 +94,7 @@ function saveToLS(key, value) {
     global.localStorage.setItem(
       "rgl-8",
       JSON.stringify({
-        [key]: value
+        [key]: value,
       })
     );
   }
