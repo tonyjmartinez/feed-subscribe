@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "styled-components";
 import { Box, Button } from "grommet";
+const globalAny: any = global;
 
 const GridBox = styled.div`
   background-color: orange;
@@ -11,7 +12,7 @@ const GridBox = styled.div`
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const originalLayouts = getFromLS("layouts") || {};
 
-const ResponsiveLocalStorageLayout = (props) => {
+const ResponsiveLocalStorageLayout = () => {
   const [layouts, setLayouts] = useState(
     JSON.parse(JSON.stringify(originalLayouts))
   );
@@ -20,7 +21,7 @@ const ResponsiveLocalStorageLayout = (props) => {
     setLayouts({});
   };
 
-  const onLayoutChange = (layout, layouts) => {
+  const onLayoutChange = (layouts: object) => {
     saveToLS("layouts", layouts);
     setLayouts(layouts);
   };
@@ -39,36 +40,36 @@ const ResponsiveLocalStorageLayout = (props) => {
         rowHeight={20}
         compactType="vertical"
         layouts={layouts}
-        onLayoutChange={(layout, layouts) => onLayoutChange(layout, layouts)}
+        onLayoutChange={(layout, layouts) => onLayoutChange(layouts)}
         style={{ position: "relative" }}
       >
         <GridBox
           key="1"
-          data-grid={{ w: 1, h: 3, x: 0, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 7, x: 0, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">1</span>
         </GridBox>
         <GridBox
           key="2"
-          data-grid={{ w: 2, h: 3, x: 2, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 7, x: 2, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">2</span>
         </GridBox>
         <GridBox
           key="3"
-          data-grid={{ w: 2, h: 3, x: 4, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 7, x: 4, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">3</span>
         </GridBox>
         <GridBox
           key="4"
-          data-grid={{ w: 2, h: 3, x: 6, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 7, x: 6, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">4</span>
         </GridBox>
         <GridBox
           key="5"
-          data-grid={{ w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 7, x: 8, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">5</span>
         </GridBox>
@@ -77,11 +78,11 @@ const ResponsiveLocalStorageLayout = (props) => {
   );
 };
 
-function getFromLS(key) {
-  let ls = {};
-  if (global.localStorage) {
+function getFromLS(key: any) {
+  let ls: any = {};
+  if (globalAny.localStorage) {
     try {
-      ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+      ls = JSON.parse(globalAny.localStorage.getItem("rgl-8")) || {};
     } catch (e) {
       /*Ignore*/
     }
@@ -89,9 +90,9 @@ function getFromLS(key) {
   return ls[key];
 }
 
-function saveToLS(key, value) {
-  if (global.localStorage) {
-    global.localStorage.setItem(
+function saveToLS(key: any, value: any) {
+  if (globalAny.localStorage) {
+    globalAny.localStorage.setItem(
       "rgl-8",
       JSON.stringify({
         [key]: value,
