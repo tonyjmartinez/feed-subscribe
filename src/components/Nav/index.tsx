@@ -1,25 +1,9 @@
 import React, { useState, useEffect, ReactElement } from "react";
 import withAppContext from "../../context/withAppContext";
-import {
-  Nav,
-  Button,
-  Anchor,
-  CheckBox,
-  Box,
-  Grid,
-  Text,
-  Heading,
-} from "grommet";
-import {
-  Home,
-  User,
-  Notification,
-  ChatOption,
-  Login,
-  Logout,
-} from "grommet-icons";
-import Comments from "../Comments";
+import { Button, Box, Grid, Text, Heading } from "grommet";
+import { User, Login, Logout } from "grommet-icons";
 import { Apps } from "grommet-icons";
+import AuthButton from "../AuthButton";
 
 import history from "../../utils/history";
 
@@ -72,10 +56,7 @@ const NavContainer = (props: Props) => {
             </Box>
           </Box>
 
-          {/* <Button >
-            <Text size="large">Title</Text>
-          </Button> */}
-          <Text>my@email</Text>
+          <AuthButton isAuth={isAuth} login={login} logout={logout} />
         </Box>
         {sidebar && (
           <Box
@@ -87,47 +68,14 @@ const NavContainer = (props: Props) => {
               { type: "slideRight", size: "xlarge", duration: 150 },
             ]}
           >
-            {isAuth ? (
-              <Button key={2} onClick={(e) => logout()}>
-                <Box
-                  direction="row"
-                  gap="xsmall"
-                  justify="center"
-                  pad={{ horizontal: "medium", vertical: "small" }}
-                  background="brand"
-                >
-                  <User />
-                  <Logout />
-                </Box>
-              </Button>
-            ) : (
-              <Button key={1} onClick={(e) => login(() => history.push("/"))}>
-                <Box
-                  direction="row"
-                  gap="xsmall"
-                  justify="center"
-                  pad={{ horizontal: "medium", vertical: "small" }}
-                  background="brand"
-                >
-                  <User />
-                  <Login />
-                </Box>
-              </Button>
-            )}
+            <AuthButton isAuth={isAuth} login={login} logout={logout} />
+
             <Button primary onClick={(e) => setIsDarkMode(!isDarkMode)}>
               DARK TOGGLE
             </Button>
           </Box>
         )}
-        <Box gridArea="main">
-          {children}
-          {/* <Text>main</Text>
-          <Text>{!isAuth ? "Not authenticated" : "Authenticated"}</Text>
-          <Text>{isAuth ? <Comments /> : null}</Text>
-          <Button primary onClick={e => setIsDarkMode(!isDarkMode)}>
-            DARK TOGGLE
-          </Button> */}
-        </Box>
+        <Box gridArea="main">{children}</Box>
       </Grid>
     </>
   );

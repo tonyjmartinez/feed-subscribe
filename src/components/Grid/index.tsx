@@ -45,31 +45,31 @@ const ResponsiveLocalStorageLayout = () => {
       >
         <GridBox
           key="1"
-          data-grid={{ w: 2, h: 7, x: 0, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 8, x: 0, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">1</span>
         </GridBox>
         <GridBox
           key="2"
-          data-grid={{ w: 2, h: 7, x: 2, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 8, x: 2, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">2</span>
         </GridBox>
         <GridBox
           key="3"
-          data-grid={{ w: 2, h: 7, x: 4, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 8, x: 4, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">3</span>
         </GridBox>
         <GridBox
           key="4"
-          data-grid={{ w: 2, h: 7, x: 6, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 8, x: 6, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">4</span>
         </GridBox>
         <GridBox
           key="5"
-          data-grid={{ w: 2, h: 7, x: 8, y: 0, minW: 2, minH: 3 }}
+          data-grid={{ w: 2, h: 8, x: 8, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">5</span>
         </GridBox>
