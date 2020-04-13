@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "styled-components";
 import { Box, Button } from "grommet";
+import Card from "../Card";
 const globalAny: any = global;
 
 const GridBox = styled.div`

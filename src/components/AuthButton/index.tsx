@@ -21,7 +21,7 @@ const AuthButton = (props: Props) => {
           gap="xsmall"
           justify="center"
           pad={{ horizontal: "medium", vertical: "small" }}
-          background="brand"
+          background="dark-2"
         >
           <Logout />
         </Box>
@@ -35,7 +35,7 @@ const AuthButton = (props: Props) => {
           gap="xsmall"
           justify="center"
           pad={{ horizontal: "medium", vertical: "small" }}
-          background="brand"
+          background="dark-2"
         >
           <User />
           <Login />

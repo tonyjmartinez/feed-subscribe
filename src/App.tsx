@@ -5,6 +5,8 @@ import { Button } from "grommet";
 import AppProvider from "./context/AppProvider";
 import withAppContext from "./context/withAppContext";
 import Comments from "./components/Comments";
+import Feeds from "./components/Feeds";
+import NBA from "./components/Feeds/NBA";
 import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
@@ -23,14 +25,14 @@ import {
   EXPIRES_IN,
   ID_TOKEN,
   ACCESS_TOKEN,
-  checkAuthAsync
+  checkAuthAsync,
 } from "./utils/auth0-helper";
 import { Router, Switch, Route, Link, useHistory } from "react-router-dom";
 import history from "./utils/history";
 
 const httpLink = createHttpLink({
   // uri: "https://0edpiwx4nd.execute-api.us-east-1.amazonaws.com/dev/api/graphql"
-  uri: "https://api.feedsubscri.be/dev/api/graphql"
+  uri: "https://api.feedsubscri.be/dev/api/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -40,14 +42,14 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : ""
-    }
+      authorization: token ? `Bearer ${token}` : "",
+    },
   };
 });
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 interface Props {
@@ -74,6 +76,8 @@ const App = (props: Props) => {
                 path="/comments"
                 component={Comments}
               ></PrivateRoute>
+              <PrivateRoute path="/feeds" component={Feeds} />
+              <PrivateRoute path="/nba" component={NBA} />
             </Router>
           </Nav>
         </GromProvider>
