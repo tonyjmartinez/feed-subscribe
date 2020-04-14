@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 import Nav from "./components/Nav";
-import { Button } from "grommet";
 import AppProvider from "./context/AppProvider";
 import withAppContext from "./context/withAppContext";
 import Comments from "./components/Comments";
@@ -17,17 +16,8 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import Grid from "./components/Grid/index";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
-import {
-  handleAuthentication,
-  checkAuth,
-  login,
-  logout,
-  EXPIRES_IN,
-  ID_TOKEN,
-  ACCESS_TOKEN,
-  checkAuthAsync,
-} from "./utils/auth0-helper";
-import { Router, Switch, Route, Link, useHistory } from "react-router-dom";
+import { ID_TOKEN } from "./utils/auth0-helper";
+import { Router, Route } from "react-router-dom";
 import history from "./utils/history";
 
 const httpLink = createHttpLink({
@@ -60,9 +50,7 @@ interface Props {
   };
 }
 
-const App = (props: Props) => {
-  const { context } = props;
-  const { isDarkMode, setIsDarkMode } = context;
+const App = () => {
   return (
     <ApolloProvider client={client}>
       <AppProvider resetStore={client.resetStore}>
