@@ -30,36 +30,36 @@ const GromProvider = (props: Props) => {
             "toggle-knob": "white",
             "toggle-accent": "accent-2",
             brand: {
-              dark: "#7700cc",
-              light: "#6600cc"
+              dark: "#01579b",
+              light: "#03a9f4",
             },
             background: {
               dark: "#111111",
-              light: "#FFFFFF"
-            }
-          }
+              light: "#FFFFFF",
+            },
+          },
         },
         checkBox: {
           border: {
             color: {
-              light: "toggle-bg"
-            }
+              light: "toggle-bg",
+            },
           },
           color: {
-            light: "toggle-knob"
+            light: "toggle-knob",
           },
           check: {
-            radius: "2px"
+            radius: "2px",
           },
           hover: {
             border: {
-              color: undefined
-            }
+              color: undefined,
+            },
           },
           toggle: {
             background: { light: "toggle-accent" },
             color: {
-              light: "toggle-knob"
+              light: "toggle-knob",
             },
             size: "36px",
             knob: {
@@ -67,16 +67,16 @@ const GromProvider = (props: Props) => {
               top: -4px;
               box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12),
                0px 2px 2px 0px rgba(0,0,0,0.24);
-            `
+            `,
             },
             extend: ({ checked }) => `
             height: 14px;
             ${checked && checkboxCheckStyle}
-          `
+          `,
           },
           gap: "xsmall",
-          size: "18px"
-        }
+          size: "18px",
+        },
       }}
     >
       {props.children}

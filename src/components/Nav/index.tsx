@@ -1,9 +1,10 @@
 import React, { useState, useEffect, ReactElement } from "react";
 import withAppContext from "../../context/withAppContext";
-import { Button, Box, Grid, Text, Heading } from "grommet";
+import { Button, Box, Grid, Text, Heading, CheckBox } from "grommet";
 import { User, Login, Logout } from "grommet-icons";
 import { Apps } from "grommet-icons";
 import AuthButton from "../AuthButton";
+import { Link } from "react-router-dom";
 
 import history from "../../utils/history";
 
@@ -40,7 +41,7 @@ const NavContainer = (props: Props) => {
           align="center"
           justify="between"
           pad={{ horizontal: "small", vertical: "small" }}
-          background="dark-2"
+          background="brand"
         >
           <Box direction="row" gap="large">
             <Apps
@@ -51,7 +52,9 @@ const NavContainer = (props: Props) => {
             />
             <Box alignSelf="center">
               <Heading level={3} margin="none" color="light-1">
-                FeedSubscri.be
+                <Link style={{ color: "inherit" }} to="/">
+                  FeedSubscri.be
+                </Link>
               </Heading>
             </Box>
           </Box>
@@ -61,7 +64,7 @@ const NavContainer = (props: Props) => {
         {sidebar && (
           <Box
             gridArea="sidebar"
-            background="dark-3"
+            background="brand"
             width="xsmall"
             animation={[
               { type: "fadeIn", duration: 300 },
@@ -69,10 +72,18 @@ const NavContainer = (props: Props) => {
             ]}
           >
             <AuthButton isAuth={isAuth} login={login} logout={logout} />
-
-            <Button primary onClick={(e) => setIsDarkMode(!isDarkMode)}>
-              DARK TOGGLE
-            </Button>
+            <Box
+              direction="row"
+              gap="xsmall"
+              justify="center"
+              pad={{ horizontal: "medium", vertical: "small" }}
+            >
+              <CheckBox
+                checked={!isDarkMode}
+                onChange={(e) => setIsDarkMode(!isDarkMode)}
+                toggle
+              />
+            </Box>
           </Box>
         )}
         <Box gridArea="main">{children}</Box>

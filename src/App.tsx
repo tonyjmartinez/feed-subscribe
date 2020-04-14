@@ -67,8 +67,8 @@ const App = (props: Props) => {
     <ApolloProvider client={client}>
       <AppProvider resetStore={client.resetStore}>
         <GromProvider>
-          <Nav>
-            <Router history={history}>
+          <Router history={history}>
+            <Nav>
               <Route exact path="/">
                 <Grid />
               </Route>
@@ -78,8 +78,8 @@ const App = (props: Props) => {
               ></PrivateRoute>
               <PrivateRoute path="/feeds" component={Feeds} />
               <PrivateRoute path="/nba" component={NBA} />
-            </Router>
-          </Nav>
+            </Nav>
+          </Router>
         </GromProvider>
       </AppProvider>
     </ApolloProvider>
