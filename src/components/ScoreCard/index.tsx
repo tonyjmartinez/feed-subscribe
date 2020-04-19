@@ -7,7 +7,6 @@ interface DivProps {
 }
 
 const CardDiv = styled.div<DivProps>`
-  width: 20%;
   display: inline-block;
   text-align: center;
   vertical-align: ${(props) => (props.middle ? "middle" : "baseline")};
@@ -21,7 +20,6 @@ const ContentDiv = styled.div`
 
 const GameStateDiv = styled.div`
   text-align: center;
-  width: 100%;
 `;
 
 interface CardProps {
@@ -54,7 +52,7 @@ const Card = (props: CardProps) => {
                   <CardDiv middle width="10%">
                     {visitor.logo}
                   </CardDiv>
-                  <CardDiv width={`80%`}>{visitor.name}</CardDiv>
+                  <CardDiv>{visitor.name}</CardDiv>
                   <CardDiv width="10%">
                     <span>{visitor.score}</span>
                   </CardDiv>
@@ -64,7 +62,7 @@ const Card = (props: CardProps) => {
                   <CardDiv middle width="10%">
                     {home.logo}
                   </CardDiv>
-                  <CardDiv width="80%">{home.name}</CardDiv>
+                  <CardDiv>{home.name}</CardDiv>
                   <CardDiv width="10%">
                     <span>{home.score}</span>
                   </CardDiv>

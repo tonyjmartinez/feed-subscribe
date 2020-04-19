@@ -2,18 +2,37 @@ import React, { useState } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "styled-components";
 import { Box, Button } from "grommet";
-import Card from "../Card";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import withThemeContext from "../../context/withThemeContext";
+import { compose } from "rambda";
+import withAppContext from "../../context/withAppContext";
+import NBA from "../Feeds/NBA";
 const globalAny: any = global;
 
-const GridBox = styled.div`
-  background-color: orange;
+interface GridBoxProps {
+  color: any;
+}
+const GridBox = styled.div<GridBoxProps>`
+  background-color: ${(props) => props.color};
   border-radius: 0.5em;
+  overflow: scroll;
 `;
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 const originalLayouts = getFromLS("layouts") || {};
 
-const ResponsiveLocalStorageLayout = () => {
+interface Props {
+  theme: any;
+  context: {
+    isDarkMode: boolean;
+  };
+}
+
+const ResponsiveLocalStorageLayout = (props: Props) => {
+  console.log("props", props);
+  console.log("brand", props.theme.global.colors.brand);
+  const colors = props.theme.global.colors;
   const [layouts, setLayouts] = useState(
     JSON.parse(JSON.stringify(originalLayouts))
   );
@@ -47,10 +66,13 @@ const ResponsiveLocalStorageLayout = () => {
         <GridBox
           key="1"
           data-grid={{ w: 2, h: 8, x: 0, y: 0, minW: 2, minH: 3 }}
+          color={
+            props.context.isDarkMode ? colors.brand.dark : colors.brand.light
+          }
         >
-          <span className="text">1</span>
+          <NBA />
         </GridBox>
-        <GridBox
+        {/* <GridBox
           key="2"
           data-grid={{ w: 2, h: 8, x: 2, y: 0, minW: 2, minH: 3 }}
         >
@@ -73,7 +95,7 @@ const ResponsiveLocalStorageLayout = () => {
           data-grid={{ w: 2, h: 8, x: 8, y: 0, minW: 2, minH: 3 }}
         >
           <span className="text">5</span>
-        </GridBox>
+        </GridBox> */}
       </ResponsiveReactGridLayout>
     </Box>
   );
@@ -102,4 +124,7 @@ function saveToLS(key: any, value: any) {
   }
 }
 
-export default ResponsiveLocalStorageLayout;
+export default compose(
+  withThemeContext,
+  withAppContext
+)(ResponsiveLocalStorageLayout);

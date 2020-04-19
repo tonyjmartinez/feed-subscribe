@@ -25,6 +25,8 @@
     "grommet": "^2.11.2",
     "grommet-icons": "^4.4.0",
     "history": "^4.10.1",
+    "lodash": "^4.17.15",
+    "rambda": "^5.1.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-grid-layout": "^0.18.3",

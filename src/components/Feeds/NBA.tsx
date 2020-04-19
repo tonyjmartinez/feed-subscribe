@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import Card from "../Card";
+import ScoreCard from "../ScoreCard";
 
 interface Props {}
 
@@ -19,7 +19,7 @@ const NBA = (props: Props) => {
 
   if (loading) return <div>Loading...</div>;
   else if (error) return <div>error!</div>;
-  else if (data) return <Card scores={data.nba.games} />;
+  return <ScoreCard scores={data.nba.games} />;
 };
 
 export default NBA;
