@@ -26,6 +26,7 @@ interface Props {
   theme: any;
   context: {
     isDarkMode: boolean;
+    isAuth: boolean;
   };
 }
 
@@ -70,7 +71,7 @@ const ResponsiveLocalStorageLayout = (props: Props) => {
             props.context.isDarkMode ? colors.brand.dark : colors.brand.light
           }
         >
-          <NBA />
+          {props.context.isAuth && <NBA />}
         </GridBox>
         {/* <GridBox
           key="2"

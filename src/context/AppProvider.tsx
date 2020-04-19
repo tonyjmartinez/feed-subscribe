@@ -6,7 +6,7 @@ import {
   checkAuth,
   login,
   logout,
-  checkAuthAsync
+  checkAuthAsync,
 } from "../utils/auth0-helper";
 import history from "../utils/history";
 export interface Props {
@@ -21,10 +21,10 @@ const AppProvider = (props: Props) => {
 
   useEffect(() => {
     handleAuthentication((res: boolean) => {
-      resetStore();
-
-      history.push("/");
-      setIsAuth(res);
+      resetStore().then(() => {
+        history.push("/");
+        setIsAuth(res);
+      });
     });
   }, []);
   useEffect(() => {
@@ -50,7 +50,7 @@ const AppProvider = (props: Props) => {
         isDarkMode,
         setIsDarkMode,
         login,
-        logout
+        logout,
         // isAuth: authorized,
         // signin: attemptLogin,
         // setDarkMode,
