@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { CSSObject } from "styled-components";
+import logos from "react-nba-logos";
 
 interface DivProps {
   readonly middle?: Boolean;
@@ -41,6 +42,11 @@ const Card = (props: CardProps) => {
       {scores &&
         scores.map((score: ScoreType) => {
           const { home, visitor, gameState, active } = score;
+          // const HomeLogo = logos[home.triCode];
+          // const VisitorLogo = logos[visitor.triCode];
+          console.log("logos", logos);
+          console.log("home visitor", home, visitor);
+
           return (
             <div
               key={home.name}
@@ -50,7 +56,7 @@ const Card = (props: CardProps) => {
               <div className="card-content">
                 <ContentDiv key={visitor.name}>
                   <CardDiv middle width="10%">
-                    {visitor.logo}
+                    {/* <VisitorLogo /> */}
                   </CardDiv>
                   <CardDiv>{visitor.name}</CardDiv>
                   <CardDiv width="10%">
@@ -60,7 +66,7 @@ const Card = (props: CardProps) => {
                 </ContentDiv>
                 <ContentDiv key={home.name}>
                   <CardDiv middle width="10%">
-                    {home.logo}
+                    {/* <HomeLogo /> */}
                   </CardDiv>
                   <CardDiv>{home.name}</CardDiv>
                   <CardDiv width="10%">

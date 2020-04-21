@@ -63,6 +63,7 @@ const ResponsiveLocalStorageLayout = (props: Props) => {
         layouts={layouts}
         onLayoutChange={(layout, layouts) => onLayoutChange(layouts)}
         style={{ position: "relative" }}
+        isDraggable={false}
       >
         <GridBox
           key="1"
