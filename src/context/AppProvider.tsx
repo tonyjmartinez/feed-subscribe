@@ -39,7 +39,7 @@ const AppProvider = (props: Props) => {
     };
     setTimeout(() => {
       callCheckAuth();
-    }, 100);
+    }, 200);
   }, []);
 
   return (

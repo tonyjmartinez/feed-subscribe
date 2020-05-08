@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { CSSObject } from "styled-components";
-import logos from "react-nba-logos";
+import * as logos from "react-nba-logos";
 
 interface DivProps {
   readonly middle?: Boolean;
@@ -42,8 +42,10 @@ const Card = (props: CardProps) => {
       {scores &&
         scores.map((score: ScoreType) => {
           const { home, visitor, gameState, active } = score;
-          // const HomeLogo = logos[home.triCode];
-          // const VisitorLogo = logos[visitor.triCode];
+          const logo: any = logos;
+          const HomeLogo = logo[home.triCode];
+
+          const VisitorLogo = logo[visitor.triCode];
           console.log("logos", logos);
           console.log("home visitor", home, visitor);
 
@@ -51,25 +53,25 @@ const Card = (props: CardProps) => {
             <div
               key={home.name}
               className="card"
-              style={{ marginBottom: "1em" }}
+              style={{ marginBottom: "1em", textAlign: "center" }}
             >
               <div className="card-content">
                 <ContentDiv key={visitor.name}>
-                  <CardDiv middle width="10%">
-                    {/* <VisitorLogo /> */}
+                  <CardDiv middle width="20%">
+                    <VisitorLogo size={35} />
                   </CardDiv>
-                  <CardDiv>{visitor.name}</CardDiv>
-                  <CardDiv width="10%">
+                  <CardDiv width="60%">{visitor.name}</CardDiv>
+                  <CardDiv width="20%">
                     <span>{visitor.score}</span>
                   </CardDiv>
                   <br />
                 </ContentDiv>
                 <ContentDiv key={home.name}>
-                  <CardDiv middle width="10%">
-                    {/* <HomeLogo /> */}
+                  <CardDiv middle width="20%">
+                    <HomeLogo size={35} />
                   </CardDiv>
-                  <CardDiv>{home.name}</CardDiv>
-                  <CardDiv width="10%">
+                  <CardDiv width="60%">{home.name}</CardDiv>
+                  <CardDiv width="20%">
                     <span>{home.score}</span>
                   </CardDiv>
                 </ContentDiv>

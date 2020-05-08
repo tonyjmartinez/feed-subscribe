@@ -16,7 +16,7 @@ interface GridBoxProps {
 const GridBox = styled.div<GridBoxProps>`
   background-color: ${(props) => props.color};
   border-radius: 0.5em;
-  overflow: scroll;
+  overflow: hidden;
 `;
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
