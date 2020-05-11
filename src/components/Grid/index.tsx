@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { WidthProvider, Responsive } from "react-grid-layout";
 import styled from "styled-components";
 import { Box, Button } from "grommet";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import withThemeContext from "../../context/withThemeContext";
 import { compose } from "rambda";
 import withAppContext from "../../context/withAppContext";
@@ -71,33 +69,10 @@ const ResponsiveLocalStorageLayout = (props: Props) => {
           color={
             props.context.isDarkMode ? colors.brand.dark : colors.brand.light
           }
+          style={{ overflow: "scroll" }}
         >
           {props.context.isAuth && <NBA />}
         </GridBox>
-        {/* <GridBox
-          key="2"
-          data-grid={{ w: 2, h: 8, x: 2, y: 0, minW: 2, minH: 3 }}
-        >
-          <span className="text">2</span>
-        </GridBox>
-        <GridBox
-          key="3"
-          data-grid={{ w: 2, h: 8, x: 4, y: 0, minW: 2, minH: 3 }}
-        >
-          <span className="text">3</span>
-        </GridBox>
-        <GridBox
-          key="4"
-          data-grid={{ w: 2, h: 8, x: 6, y: 0, minW: 2, minH: 3 }}
-        >
-          <span className="text">4</span>
-        </GridBox>
-        <GridBox
-          key="5"
-          data-grid={{ w: 2, h: 8, x: 8, y: 0, minW: 2, minH: 3 }}
-        >
-          <span className="text">5</span>
-        </GridBox> */}
       </ResponsiveReactGridLayout>
     </Box>
   );
