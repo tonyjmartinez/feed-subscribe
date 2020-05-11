@@ -69,7 +69,7 @@ const ResponsiveLocalStorageLayout = (props: Props) => {
           color={
             props.context.isDarkMode ? colors.brand.dark : colors.brand.light
           }
-          style={{ overflow: "scroll" }}
+          style={{ overflow: "scroll", touchAction: "auto !important" }}
         >
           {props.context.isAuth && <NBA />}
         </GridBox>

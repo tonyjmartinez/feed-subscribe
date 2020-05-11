@@ -1,1 +1,5 @@
 @import "~antd/dist/antd.css";
+
+.react-grid-item {
+  touch-action: auto !important;
+}
