@@ -60,7 +60,7 @@ const ResponsiveLocalStorageLayout = (props: Props) => {
         compactType="vertical"
         layouts={layouts}
         onLayoutChange={(layout, layouts) => onLayoutChange(layouts)}
-        style={{ position: "relative" }}
+        style={{ position: "relative", width: "90%" }}
         isDraggable={false}
       >
         <GridBox
@@ -69,7 +69,37 @@ const ResponsiveLocalStorageLayout = (props: Props) => {
           color={
             props.context.isDarkMode ? colors.brand.dark : colors.brand.light
           }
-          style={{ overflow: "scroll", touchAction: "auto !important" }}
+          style={{ overflow: "scroll" }}
+        >
+          {props.context.isAuth && <NBA />}
+        </GridBox>
+        <GridBox
+          key="2"
+          data-grid={{ w: 2, h: 8, x: 0, y: 1, minW: 2, minH: 3 }}
+          color={
+            props.context.isDarkMode ? colors.brand.dark : colors.brand.light
+          }
+          style={{ overflow: "scroll" }}
+        >
+          {props.context.isAuth && <NBA />}
+        </GridBox>
+        <GridBox
+          key="3"
+          data-grid={{ w: 2, h: 8, x: 0, y: 1, minW: 2, minH: 3 }}
+          color={
+            props.context.isDarkMode ? colors.brand.dark : colors.brand.light
+          }
+          style={{ overflow: "scroll" }}
+        >
+          {props.context.isAuth && <NBA />}
+        </GridBox>
+        <GridBox
+          key="4"
+          data-grid={{ w: 2, h: 8, x: 0, y: 1, minW: 2, minH: 3 }}
+          color={
+            props.context.isDarkMode ? colors.brand.dark : colors.brand.light
+          }
+          style={{ overflow: "scroll" }}
         >
           {props.context.isAuth && <NBA />}
         </GridBox>
